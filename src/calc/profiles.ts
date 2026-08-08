@@ -6,6 +6,7 @@ export interface SkillComparisonProfile {
   label: string;
   modifiers: SkillModifier[];
   ignoreCriticalDamage?: boolean;
+  ignoreCooldownForCalculations?: boolean;
   includedDamageScopes?: DamageScope[];
 }
 
@@ -15,7 +16,7 @@ interface SkillProfileDefinition {
   overlap?: SkillComparisonProfile;
 }
 
-type ProfileOptions = Pick<SkillComparisonProfile, "ignoreCriticalDamage" | "includedDamageScopes">;
+type ProfileOptions = Pick<SkillComparisonProfile, "ignoreCriticalDamage" | "ignoreCooldownForCalculations" | "includedDamageScopes">;
 type ModifierSeed = readonly [SkillModifierType, number, string?];
 
 const hit = (value: number, key = "hits"): ModifierSeed => ["hit_count", value, key];
@@ -107,9 +108,9 @@ const skillProfiles: Record<string, SkillProfileDefinition> = Object.fromEntries
   define("Bodyswap", "Life and corpse explosion", [added(850, "player-life"), added(4557, "corpse-life")], ["Adds 850 flat damage for 5,000 player Life and 4,557 flat damage for a level 26 Unearth corpse. Desecrate has a 15% chance to create the corpse of a raised Meatsack Spectre."]),
   define("BodyswapAltX", "Sacrificed minion", [added(200, "player-life"), added(14500, "minion-life")], ["Adds 200 flat damage for 5,000 player Life and 14,500 flat damage, assuming a 50,000-Life Raise Zombie. Top-end setups can reach roughly 200,000 Life with three Axiom Wardens, Aukuna's Will, tattoos, and Minion Life Support."]),
 
-  defineDual("ColdSnapAltX", ["Assumes one hit by default or three hits with Greater Spell Cascade and one fewer damage support. Pact of Beidat can significantly increase the damage."],
-    { label: "Default hit", modifiers: [hit(1)] },
-    { label: "Greater Spell Cascade", modifiers: [hit(3), more(-24, "cascade-penalty"), more(-25, "support-replacement")] }),
+  defineDual("ColdSnapAltX", ["Assumes one hit by default or three hits with Greater Spell Cascade and one fewer damage support. The cooldown is ignored because spending a Power Charge bypasses it. Pact of Beidat can significantly increase the damage."],
+    { label: "Default hit", modifiers: [hit(1)], options: { ignoreCooldownForCalculations: true } },
+    { label: "Greater Spell Cascade", modifiers: [hit(3), more(-24, "cascade-penalty"), more(-25, "support-replacement")], options: { ignoreCooldownForCalculations: true } }),
   define("CracklingLance", "Maximum Intensity", [more(200)], ["Assumes four Intensity stacks (200% more damage)."]),
   defineDual("CreepingFrost", ["Assumes two hits by default, or six hits with Greater Multiple Projectiles and pierce when projectile/overlap supports are enabled, including the support and replacement penalties."],
     { label: "Default overlap", modifiers: [hit(2)] },

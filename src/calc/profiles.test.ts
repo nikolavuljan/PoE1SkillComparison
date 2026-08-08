@@ -53,6 +53,12 @@ describe("comparison profiles", () => {
     expect(defaultSettingDescription(view("FireTrapAltX"))).toContain("additional flat damage against a Burning enemy");
   });
 
+  it("marks both Cold Snap of Power profiles as bypassing cooldown", () => {
+    expect(comparisonProfile(view("ColdSnapAltX"), false)?.ignoreCooldownForCalculations).toBe(true);
+    expect(comparisonProfile(view("ColdSnapAltX"), true)?.ignoreCooldownForCalculations).toBe(true);
+    expect(defaultSettingDescription(view("ColdSnapAltX"))).toContain("spending a Power Charge bypasses it");
+  });
+
   it("contains the revised standalone profile values", () => {
     expect(modifierValues("BladeBlastAltX")).toEqual([
       ["hit_count", 10],

@@ -107,7 +107,8 @@ export function calculateSkill(
   }
 
   const castTime = adjustedCastTime(modifiers.overrideCastTime ?? view.ability.castTime, modifiers.moreSpeedMultiplier);
-  const calculationInterval = spellCalculationInterval(castTime, cooldown, storedUses, global.useCooldownForCalculations, warnings);
+  const useCooldown = global.useCooldownForCalculations && !profile?.ignoreCooldownForCalculations;
+  const calculationInterval = spellCalculationInterval(castTime, cooldown, storedUses, useCooldown, warnings);
   const hitDps = calculationInterval ? averageHit * hits / calculationInterval : 0;
   return {
     level: level.level,

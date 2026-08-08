@@ -160,6 +160,29 @@ describe("PoE1 skill calculations", () => {
     expect(result.warnings).toContain("Cooldown calculation uses 8 sec ÷ 3 uses = 2.66667 sec per use.");
   });
 
+  it("ignores Cold Snap of Power's cooldown when Power Charges bypass it", () => {
+    const skill = view({
+      id: "ColdSnapAltX",
+      levels: [{
+        level: 20,
+        damage: { ranges: [{ source: "spell", kind: "base", type: "cold", min: 100, max: 200 }] },
+        addedDamageEffectivenessPercent: 200,
+        criticalStrikeChance: 0,
+        metadata: { cooldown: 3, storedUses: 1 }
+      }]
+    });
+    const result = calculateSkill(skill, {
+      ...defaultGlobalInputs,
+      critMode: "off",
+      projectileOverlapSupports: false,
+      useCooldownForCalculations: true
+    }, defaultSkillSettings);
+
+    expect(result.hitDps).toBeCloseTo(187.5);
+    expect(result.averageDamageEffectivenessPerSecondPercent).toBeCloseTo(250);
+    expect(result.warnings.some((warning) => warning.startsWith("Cooldown calculation uses"))).toBe(false);
+  });
+
   it("does not calculate supplemental damage and explains how to opt into it", () => {
     const skill = view({ levels: [{
       level: 20,
