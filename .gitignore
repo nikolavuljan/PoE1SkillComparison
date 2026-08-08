@@ -1,0 +1,41 @@
+# Dependencies
+node_modules/
+
+# Generated PoB exports
+# The website needs gem-data.json in fresh clones and GitHub Pages builds.
+data/generated/*
+!data/generated/gem-data.json
+
+# Production builds
+dist/
+
+# Test output
+coverage/
+.vitest/
+
+# Build and tool caches
+.vite/
+*.tsbuildinfo
+.eslintcache
+.stylelintcache
+
+# Local environment files
+.env
+.env.*
+!.env.example
+
+# Logs and temporary files
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.tmp
+*.temp
+
+# Editor and operating-system files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+Desktop.ini

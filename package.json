@@ -1,0 +1,29 @@
+{
+  "name": "poe1-skill-comparison",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "check": "npm run test && npm run build",
+    "export:pob": "node tools/export-pob-data.mjs",
+    "export:pob:local": "node tools/export-pob-data.mjs --pob \"../Path of Building Community/Data\"",
+    "export:pob:damage": "node tools/export-pob-data.mjs --pob \"../Path of Building Community/Data\" --active-damage-only"
+  },
+  "dependencies": {
+    "@tanstack/react-table": "^9.0.0",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.2",
+    "jsdom": "^29.1.1",
+    "typescript": "^6.0.3",
+    "vite": "^8.0.16",
+    "vitest": "^4.1.8"
+  }
+}
