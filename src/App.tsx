@@ -65,7 +65,15 @@ export default function App() {
       <div className="tabs-row">
         <nav className="tabs" aria-label="Skill category">
           {(["spells", "attacks"] satisfies Tab[]).map((entry) => (
-            <button key={entry} type="button" className={tab === entry ? "active" : ""} aria-current={tab === entry ? "page" : undefined} onClick={() => setTab(entry)}>
+            <button
+              key={entry}
+              type="button"
+              className={tab === entry ? "active" : ""}
+              aria-current={tab === entry ? "page" : undefined}
+              disabled={entry === "attacks"}
+              title={entry === "attacks" ? "Unavailable until the attack comparison is reworked" : undefined}
+              onClick={() => setTab(entry)}
+            >
               <span>{entry === "spells" ? "Spells" : "Attacks"}</span><b>{counts[entry]}</b>
             </button>
           ))}
