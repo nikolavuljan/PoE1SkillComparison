@@ -105,7 +105,7 @@ const skillProfiles: Record<string, SkillProfileDefinition> = Object.fromEntries
   define("BladefallAltZ", "Mana-scaled hit rate", [cast(.35)], ["Assumes 5,000 Mana."]),
   define("BlazingSalvo", "Projectile overlap", [hit(8)], ["Assumes eight hits."]),
 
-  define("Bodyswap", "Life and corpse explosion", [added(850, "player-life"), added(4557, "corpse-life")], ["Adds 850 flat damage for 5,000 player Life and 4,557 flat damage for a level 26 Unearth corpse. Desecrate has a 15% chance to create the corpse of a raised Meatsack Spectre."]),
+  define("Bodyswap", "Life and corpse explosion", [added(850, "player-life"), added(4557, "corpse-life")], ["Adds 850 flat damage for 5,000 player Life and 4,557 flat damage for a level 26 Unearth corpse. Desecrate with a raised Meatsack Spectre has a 15% chance to create its corpse and provides about one third as much flat damage as level 26 Unearth."]),
   define("BodyswapAltX", "Sacrificed minion", [added(200, "player-life"), added(14500, "minion-life")], ["Adds 200 flat damage for 5,000 player Life and 14,500 flat damage, assuming a 50,000-Life Raise Zombie. Top-end setups can reach roughly 200,000 Life with three Axiom Wardens, Aukuna's Will, tattoos, and Minion Life Support."]),
 
   defineDual("ColdSnapAltX", ["Assumes one hit by default or three hits with Greater Spell Cascade and one fewer damage support. The cooldown is ignored because spending a Power Charge bypasses it. Pact of Beidat can significantly increase the damage."],
@@ -116,10 +116,10 @@ const skillProfiles: Record<string, SkillProfileDefinition> = Object.fromEntries
     { label: "Default overlap", modifiers: [hit(2)] },
     { label: "Projectile overlap", modifiers: [hit(6), more(-21, "projectile-support-penalty"), more(-25, "support-replacement")] }),
 
-  defineDual("DetonateDead", ["Assumes a level 26 Unearth corpse: one hit by default, or six hits with Greater Spell Cascade and one fewer damage support. Desecrate has a 15% chance to create the corpse of a raised Meatsack Spectre."],
+  defineDual("DetonateDead", ["Assumes a level 26 Unearth corpse: one hit by default, or six hits with Greater Spell Cascade and one fewer damage support. Desecrate with a raised Meatsack Spectre has a 15% chance to create its corpse and provides about one third as much flat damage as level 26 Unearth."],
     { label: "Default corpse explosion", modifiers: [added(4557), hit(1)] },
     { label: "Unearth cascade", modifiers: [added(4557), hit(6), more(-24, "cascade-penalty"), more(-25, "support-replacement")] }),
-  define("DetonateDeadAltY", "Chain Reaction corpses", [added(2848), hit(8)], ["Assumes eight hits and 2,848 corpse flat damage from level 26 Unearth. Desecrate has a 15% chance to create the corpse of a raised Meatsack Spectre."]),
+  define("DetonateDeadAltY", "Chain Reaction corpses", [added(2848), hit(8)], ["Assumes eight hits and 2,848 corpse flat damage from level 26 Unearth. Desecrate with a raised Meatsack Spectre has a 15% chance to create its corpse and provides about one third as much flat damage as level 26 Unearth."]),
   define("Discharge", "Nine-charge total", [hit(3)], ["Assumes three Power, three Endurance, and three Frenzy Charges."]),
   define("DischargeAltX", "Nine-charge total", [hit(3)], ["Assumes three Power, three Endurance, and three Frenzy Charges."]),
   define("DivineIre", "Perfect release", [more(227)], ["Assumes a perfect release at 10 stages (227% more damage)."]),
@@ -192,13 +192,13 @@ const skillProfiles: Record<string, SkillProfileDefinition> = Object.fromEntries
   define("WinterOrb", "Channelled stages", [cast(.2222), hit(3)], ["Assumes 11 stages while channelling, three hits, and a 0.2222-second overridden cast time."]),
   define("Stormbind", "Rune estimate", [cast(.6), more(300)], ["Uses a 0.6-second override: 0.12 seconds to place a rune and three 0.18-second upgrades, producing the 300% more-damage third-improvement explosion."]),
 
-  defineDual("VolatileDead", ["Assumes three hits by default, or 12 with Greater Spell Cascade and one fewer damage support. The corpse damage uses Desecrate; Unearth can be higher but makes sustaining enough corpses harder."],
+  defineDual("VolatileDead", ["Assumes three hits by default, or 12 with Greater Spell Cascade and one fewer damage support. This profile uses 800 flat damage from Desecrate corpses because Desecrate can sustain the required corpse count. Level 26 Unearth provides more flat damage per corpse but is harder to sustain at these hit counts."],
     { label: "Default corpse sequence", modifiers: [hit(3), added(800)] },
     { label: "Cascade corpse sequence", modifiers: [more(-24, "cascade-penalty"), more(-25, "support-replacement"), hit(12), added(800)] }),
-  defineDual("VolatileDeadAltX", ["Assumes three hits by default, or 12 with Greater Spell Cascade and one fewer damage support. The corpse damage uses Desecrate; Unearth can be higher but makes sustaining enough corpses harder."],
+  defineDual("VolatileDeadAltX", ["Assumes three hits by default, or 12 with Greater Spell Cascade and one fewer damage support. This profile uses 800 flat damage from Desecrate corpses because Desecrate can sustain the required corpse count. Level 26 Unearth provides more flat damage per corpse but is harder to sustain at these hit counts."],
     { label: "Default corpse sequence", modifiers: [hit(3), added(800)] },
     { label: "Cascade corpse sequence", modifiers: [more(-24, "cascade-penalty"), more(-25, "support-replacement"), hit(12), added(800)] }),
-  define("VolatileDeadAltY", "Seething corpse sequence", [added(800), hit(10), cast(1)], ["Assumes 10 hits and a 1-second custom cast time. The orbs take 0.67 seconds to emerge and at least 1 second to hit the main target, which is why the skill struggles with its 10-orb cap. The corpse damage uses Desecrate; Unearth can be higher but makes sustaining enough corpses harder."])
+  define("VolatileDeadAltY", "Seething corpse sequence", [added(800), hit(10), cast(1)], ["Assumes 10 hits and a 1-second custom cast time. The orbs take 0.67 seconds to emerge and at least 1 second to hit the main target, which is why the skill struggles with its 10-orb cap. This profile uses 800 flat damage from Desecrate corpses because Desecrate can sustain the required corpse count. Level 26 Unearth provides more flat damage per corpse but is harder to sustain at these hit counts."])
 ]);
 
 export function comparisonProfile(view: SkillView, useProjectileOverlapSupports: boolean): SkillComparisonProfile | undefined {

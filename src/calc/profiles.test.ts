@@ -59,6 +59,20 @@ describe("comparison profiles", () => {
     expect(defaultSettingDescription(view("ColdSnapAltX"))).toContain("spending a Power Charge bypasses it");
   });
 
+  it("describes the corpse source relative to the selected defaults", () => {
+    for (const id of ["Bodyswap", "DetonateDead", "DetonateDeadAltY"]) {
+      const description = defaultSettingDescription(view(id));
+      expect(description).toContain("15% chance to create its corpse");
+      expect(description).toContain("about one third as much flat damage as level 26 Unearth");
+    }
+
+    for (const id of ["VolatileDead", "VolatileDeadAltX", "VolatileDeadAltY"]) {
+      const description = defaultSettingDescription(view(id));
+      expect(description).toContain("uses 800 flat damage from Desecrate corpses");
+      expect(description).toContain("Unearth provides more flat damage per corpse");
+    }
+  });
+
   it("contains the revised standalone profile values", () => {
     expect(modifierValues("BladeBlastAltX")).toEqual([
       ["hit_count", 10],
