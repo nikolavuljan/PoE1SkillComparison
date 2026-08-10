@@ -85,6 +85,13 @@ describe("comparison profiles", () => {
       ["hit_count", 10],
       ["override_cast_time", 1]
     ]);
+    expect(modifierValues("WinterOrb")).toEqual([
+      ["override_cast_time", .2222],
+      ["hit_count", 3]
+    ]);
+    expect(defaultSettingDescription(view("WinterOrb"))).toBe(
+      "Assumes 11 stages while channelling, three hits, and a 0.2222-second overridden cast time."
+    );
   });
 
   it("applies stored overrides without mutating the registry baseline", () => {

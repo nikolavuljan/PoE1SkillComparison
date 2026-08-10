@@ -189,6 +189,7 @@ const skillProfiles: Record<string, SkillProfileDefinition> = Object.fromEntries
   define("VoidSphereAltX", "Pulse interval", [cast(.25)], ["Uses a 0.25-second pulse interval."]),
   define("VortexAltX", "Projection overlap", [hit(3), more(50)], ["Assumes three hits and 50% more damage."]),
   define("WaveOfConvictionAltY", "Wave overlap", [hit(2)], ["Assumes two hits."]),
+  define("WinterOrb", "Channelled stages", [cast(.2222), hit(3)], ["Assumes 11 stages while channelling, three hits, and a 0.2222-second overridden cast time."]),
   define("Stormbind", "Rune estimate", [cast(.6), more(300)], ["Uses a 0.6-second override: 0.12 seconds to place a rune and three 0.18-second upgrades, producing the 300% more-damage third-improvement explosion."]),
 
   defineDual("VolatileDead", ["Assumes three hits by default, or 12 with Greater Spell Cascade and one fewer damage support. The corpse damage uses Desecrate; Unearth can be higher but makes sustaining enough corpses harder."],
