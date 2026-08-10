@@ -73,7 +73,7 @@ export function InfoTooltip({ view, result, data }: Props) {
           </header>
           <div className="tooltip-facts">
             <Fact label="Gem level" value={String(result.level)} />
-            {view.gem.category === "spell" ? <Fact label="Cast time" value={formatSeconds(result.castTime)} /> : null}
+            {view.gem.category === "spell" ? <Fact label="Base cast time" value={formatSeconds(ability.castTime)} /> : null}
             {view.gem.category === "attack" ? <Fact label="Attack damage" value={formatPercent(result.weaponDamagePercent)} /> : null}
             <Fact label="Cooldown time" value={formatTooltipCooldown(result.cooldown, result.storedUses)} />
             <Fact label="Base critical chance" value={formatPercent(baseCriticalStrikeChance(ability, result.level))} />

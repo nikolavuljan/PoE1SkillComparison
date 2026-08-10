@@ -112,6 +112,8 @@ thead .sticky-column { z-index: 10; background: #24272d; }
 .marker-vaal { color: #a84444; }
 .sorted-column { color: #f0c96f; font-weight: 750; }
 .skill-cell.sorted-column .skill-name, thead th.sorted-column .sort-button { color: #f0c96f; font-weight: 800; }
+.adjusted-value { padding: 2px 5px; border-radius: 3px; background: #382b43; color: #d8adef; font-weight: 750; }
+.sorted-column .adjusted-value { color: inherit; }
 .muted { color: #6f737b; }
 .damage-badges { display: inline-flex; gap: 3px; }
 .damage-badges > span { display: grid; width: 19px; height: 19px; place-items: center; border-radius: 4px; color: white; font-size: .62rem; font-weight: 900; }

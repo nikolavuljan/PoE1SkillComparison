@@ -80,6 +80,28 @@ describe("SkillTable", () => {
     ));
 
     expect(host.querySelector<HTMLElement>('td[data-column-id="average"]')?.textContent).toBe("900");
+    expect(host.querySelector<HTMLElement>('td[data-column-id="hits"]')?.textContent).toBe("3");
+
+    const columnIds = [...host.querySelectorAll<HTMLElement>("thead [data-column-id]")].map((header) => header.dataset.columnId);
+    expect(columnIds.indexOf("hits")).toBe(columnIds.indexOf("speed") + 1);
+    expect(columnIds.indexOf("cooldown")).toBe(columnIds.indexOf("hits") + 1);
+
+    await act(async () => root.unmount());
+  });
+
+  it("highlights cast times changed from the exported base", async () => {
+    const root = createRoot(host);
+    const adjusted = skillRow("Adjusted cast", 400);
+    adjusted.view.ability.castTime = .8;
+    adjusted.result.castTime = .5;
+
+    await act(async () => root.render(
+      <SkillTable tab="spells" rows={[adjusted]} data={data} onSettingsChange={() => {}} />
+    ));
+
+    const value = host.querySelector<HTMLElement>('td[data-column-id="speed"] .adjusted-value');
+    expect(value?.textContent).toBe("0.5s");
+    expect(value?.title).toContain("exported base cast time: 0.8s");
 
     await act(async () => root.unmount());
   });

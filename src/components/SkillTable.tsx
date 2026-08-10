@@ -293,7 +293,8 @@ function makeSpellColumns() {
     numberColumn("hitDps", "Hit DPS", (row) => row.result.hitDps, formatNumber, 115),
     numberColumn("dotDps", "DoT DPS", (row) => row.result.dotDps, formatNumber, 115),
     numberColumn("crit", "Crit", (row) => row.result.critChance, formatPercent, 85),
-    numberColumn("speed", "Cast", (row) => row.result.castTime, formatSeconds, 85),
+    castTimeColumn(),
+    numberColumn("hits", "Hits", (row) => row.result.hitCount, formatNumber, 75),
     numberColumn("cooldown", "Cooldown", (row) => row.result.cooldown, formatSeconds, 100),
     numberColumn("duration", "Duration", (row) => row.result.duration, formatSeconds, 95),
     numberColumn("effectiveness", "Effectiveness", (row) => row.result.damageEffectivenessPercent, formatPercent, 115),
@@ -302,6 +303,29 @@ function makeSpellColumns() {
     tagsColumn(),
     flagsColumn()
   ]);
+}
+
+function castTimeColumn() {
+  return columnHelper.accessor((row) => row.result.castTime, {
+    id: "speed",
+    header: "Cast",
+    cell: ({ getValue, row }) => {
+      const value = getValue();
+      const base = row.original.view.ability.castTime;
+      const adjusted = value !== undefined && (base === undefined || Math.abs(value - base) > 0.000001);
+      if (!adjusted) return formatSeconds(value);
+      return (
+        <span className="adjusted-value" title={`Adjusted by active skill settings; exported base cast time: ${formatSeconds(base)}`}>
+          {formatSeconds(value)}
+        </span>
+      );
+    },
+    sortDescFirst: true,
+    sortUndefined: "last",
+    size: 85,
+    minSize: 72,
+    maxSize: 260
+  });
 }
 
 function makeAttackColumns() {
