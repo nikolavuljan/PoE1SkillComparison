@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
+import { levelFor } from "../calc/skills";
 import { displayName, primaryDescription } from "../data/derive";
 import { buildAbilityTooltipLines, buildQualityTooltipLines } from "../data/tooltip";
 import type { SkillResult, SkillView } from "../types/app";
@@ -75,7 +76,7 @@ export function InfoTooltip({ view, result, data }: Props) {
             {view.gem.category === "spell" ? <Fact label="Cast time" value={formatSeconds(result.castTime)} /> : null}
             {view.gem.category === "attack" ? <Fact label="Attack damage" value={formatPercent(result.weaponDamagePercent)} /> : null}
             <Fact label="Cooldown time" value={formatTooltipCooldown(result.cooldown, result.storedUses)} />
-            <Fact label="Critical chance" value={formatPercent(result.critChance)} />
+            <Fact label="Base critical chance" value={formatPercent(baseCriticalStrikeChance(ability, result.level))} />
             <Fact label="Damage effectiveness" value={formatPercent(result.damageEffectivenessPercent)} />
             <Fact label="Cost" value={formatCost(result.cost)} />
           </div>
@@ -136,6 +137,10 @@ export function formatTooltipCooldown(cooldown: number | undefined, storedUses: 
   if (cooldown === undefined || !Number.isFinite(cooldown) || cooldown <= 0) return "–";
   const uses = storedUses !== undefined && Number.isFinite(storedUses) ? Math.max(1, Math.floor(storedUses)) : 1;
   return `${cooldown.toFixed(2)} sec${uses > 1 ? ` (${uses} uses)` : ""}`;
+}
+
+export function baseCriticalStrikeChance(ability: SkillView["ability"], requestedLevel: number): number {
+  return levelFor(ability, requestedLevel)?.criticalStrikeChance ?? 0;
 }
 
 function Fact({ label, value }: { label: string; value: string }) {
