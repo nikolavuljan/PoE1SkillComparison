@@ -1,5 +1,10 @@
 # PoE1 Skill Comparison
 
+Live at https://nvljn.github.io/PoE1SkillComparison/
+
+<img width="1908" height="896" alt="image" src="https://github.com/user-attachments/assets/e8a79980-2e82-41d3-bf96-64e76331162b" />
+
+
 A spreadsheet-like tool for comparing Path of Exile 1 skills using data exported from Path of Building Community.
 
 The point is to make it quick to eyeball skills and their potential. It is not meant to replace Path of Building or give a final answer about real build damage.
